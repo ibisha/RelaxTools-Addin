@@ -76,6 +76,7 @@ Private Sub cmdOk_Click()
     End If
 
     SaveSetting C_TITLE, "FormatCell", "Size", chkSize.Value
+    SaveSetting C_TITLE, "FormatCell", "Height", chkHeight.Value
     SaveSetting C_TITLE, "FormatCell", "Bunrui", optBunrui1.Value
     SaveSetting C_TITLE, "FormatCell", "Font", cmbFont.Text
     SaveSetting C_TITLE, "FormatCell", "Point", txtFont.Value
@@ -130,6 +131,7 @@ Private Sub UserForm_Initialize()
     txtCol.Value = GetSetting(C_TITLE, "FormatCell", "Col", "8.5")
     txtRow.Value = GetSetting(C_TITLE, "FormatCell", "Row", "11.25")
     chkSize.Value = GetSetting(C_TITLE, "FormatCell", "Size", False)
+    chkHeight.Value = GetSetting(C_TITLE, "FormatCell", "Height", False)
     txtCol.enabled = chkSize.Value
     txtRow.enabled = chkHeight.Value
 
