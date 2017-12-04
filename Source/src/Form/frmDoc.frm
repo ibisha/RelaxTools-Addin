@@ -1,12 +1,12 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmDoc 
-   Caption         =   "Excelæ–¹çœ¼ç´™ã€€ãƒ¦ãƒ¼ã‚¶è¨­å®š"
-   ClientHeight    =   3900
+   Caption         =   "Excel•ûŠá†@ƒ†[ƒUİ’è"
+   ClientHeight    =   4380
    ClientLeft      =   45
    ClientTop       =   435
    ClientWidth     =   4515
    OleObjectBlob   =   "frmDoc.frx":0000
-   StartUpPosition =   1  'ã‚ªãƒ¼ãƒŠãƒ¼ ãƒ•ã‚©ãƒ¼ãƒ ã®ä¸­å¤®
+   StartUpPosition =   1  'ƒI[ƒi[ ƒtƒH[ƒ€‚Ì’†‰›
 End
 Attribute VB_Name = "frmDoc"
 Attribute VB_GlobalNameSpace = False
@@ -45,9 +45,12 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
+Private Sub chkHeight_Click()
+    txtRow.enabled = chkHeight.Value
+End Sub
+
 Private Sub chkSize_Click()
     txtCol.enabled = chkSize.Value
-'    txtRow.enabled = chkSize.Value
 End Sub
 
 Private Sub cmdCancel_Click()
@@ -57,19 +60,19 @@ End Sub
 Private Sub cmdOk_Click()
     
     If Not IsNumeric(txtFont.Value) Then
-        MsgBox "ãƒ•ã‚©ãƒ³ãƒˆã‚µã‚¤ã‚ºã«æ•°å€¤ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚", vbOKOnly + vbExclamation, C_TITLE
+        MsgBox "ƒtƒHƒ“ƒgƒTƒCƒY‚É”’l‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B", vbOKOnly + vbExclamation, C_TITLE
         Exit Sub
     End If
     
     If chkSize.Value Then
         If Not IsNumeric(txtCol.Value) Then
-            MsgBox "åˆ—ã®å¹…ã«æ•°å€¤ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚", vbOKOnly + vbExclamation, C_TITLE
+            MsgBox "—ñ‚Ì•‚É”’l‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B", vbOKOnly + vbExclamation, C_TITLE
             Exit Sub
         End If
-'        If Not IsNumeric(txtRow.Value) Then
-'            MsgBox "è¡Œã®é«˜ã•ã«æ•°å€¤ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚", vbOKOnly + vbExclamation, C_TITLE
-'            Exit Sub
-'        End If
+        If Not IsNumeric(txtRow.Value) Then
+            MsgBox "s‚Ì‚‚³‚É”’l‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B", vbOKOnly + vbExclamation, C_TITLE
+            Exit Sub
+        End If
     End If
 
     SaveSetting C_TITLE, "FormatCell", "Size", chkSize.Value
@@ -77,7 +80,7 @@ Private Sub cmdOk_Click()
     SaveSetting C_TITLE, "FormatCell", "Font", cmbFont.Text
     SaveSetting C_TITLE, "FormatCell", "Point", txtFont.Value
     SaveSetting C_TITLE, "FormatCell", "Col", txtCol.Value
-'    SaveSetting C_TITLE, "FormatCell", "Row", txtRow.Value
+    SaveSetting C_TITLE, "FormatCell", "Row", txtRow.Value
     Unload Me
 
 End Sub
@@ -122,13 +125,13 @@ Private Sub UserForm_Initialize()
         optBunrui1.Value = False
         optBunrui2.Value = True
     End If
-    strFont = GetSetting(C_TITLE, "FormatCell", "Font", "ï¼­ï¼³ ã‚´ã‚·ãƒƒã‚¯")
+    strFont = GetSetting(C_TITLE, "FormatCell", "Font", "‚l‚r ƒSƒVƒbƒN")
     txtFont.Value = GetSetting(C_TITLE, "FormatCell", "Point", "9")
     txtCol.Value = GetSetting(C_TITLE, "FormatCell", "Col", "8.5")
-'    txtRow.Value = GetSetting(C_TITLE, "FormatCell", "Row", "11.25")
+    txtRow.Value = GetSetting(C_TITLE, "FormatCell", "Row", "11.25")
     chkSize.Value = GetSetting(C_TITLE, "FormatCell", "Size", False)
     txtCol.enabled = chkSize.Value
-'    txtRow.enabled = chkSize.Value
+    txtRow.enabled = chkHeight.Value
 
     With Application.CommandBars("Formatting").Controls(1)
         For i = 1 To .ListCount
@@ -141,3 +144,4 @@ Private Sub UserForm_Initialize()
     cmbFont.ListIndex = pos
     
 End Sub
+
